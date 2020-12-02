@@ -8,10 +8,14 @@ import course.springdata.xmldemo.model.PhoneNumber;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args)  {
@@ -38,11 +42,19 @@ public class Main {
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
 
             // 3. Marshall POJO to XML
-         //   marshaller.marshal(person1,new File("person.xml"));
+//            marshaller.marshal(person1,new File("person.xml"));
 
             // 4. Marshall multiple persons to persons.xml
-            marshaller.marshal(new Persons(persons),new File("persons.xml"));
-           // marshaller.marshal(new Persons(persons),System.out);
+//            marshaller.marshal(new Persons(persons),new File("persons.xml"));
+//            StringWriter out = new StringWriter();
+//            marshaller.marshal(new Persons(persons),out);
+//            System.out.printf("StringWriter: %s\n",out.toString());
+
+            // 5. Unmarshal multiple Persons from XML to Java
+            Unmarshaller unmarshaller = ctx.createUnmarshaller();
+          Persons unmarshalled = (Persons) unmarshaller.unmarshal(new File("persons.xml"));
+          unmarshalled.getPersons().forEach(p -> System.out.printf("| %5d | %-15.15s | %-15.15s | %-50.50s | %-40.40s |\n", p.getId(),p.getFirstName(),p.getLastName(),p.getAddress().getCountry() + ", " + p.getAddress().getCity() + ", " + p.getAddress().getStreet() + " ",p.getPhoneNumbers().stream().map(PhoneNumber::getNumber).collect(Collectors.joining(", "))));
+
 
 
         } catch (JAXBException e) {
