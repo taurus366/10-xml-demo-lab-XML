@@ -51,9 +51,9 @@ public class Main {
 //            System.out.printf("StringWriter: %s\n",out.toString());
 
             // 5. Unmarshal multiple Persons from XML to Java
-            Unmarshaller unmarshaller = ctx.createUnmarshaller();
-          Persons unmarshalled = (Persons) unmarshaller.unmarshal(new File("persons.xml"));
-          unmarshalled.getPersons().forEach(p -> System.out.printf("| %5d | %-15.15s | %-15.15s | %-50.50s | %-40.40s |\n", p.getId(),p.getFirstName(),p.getLastName(),p.getAddress().getCountry() + ", " + p.getAddress().getCity() + ", " + p.getAddress().getStreet() + " ",p.getPhoneNumbers().stream().map(PhoneNumber::getNumber).collect(Collectors.joining(", "))));
+//            Unmarshaller unmarshaller = ctx.createUnmarshaller();
+//          Persons unmarshalled = (Persons) unmarshaller.unmarshal(new File("persons.xml"));
+//          unmarshalled.getPersons().forEach(p -> System.out.printf("| %5d | %-15.15s | %-15.15s | %-50.50s | %-40.40s |\n", p.getId(),p.getFirstName(),p.getLastName(),p.getAddress().getCountry() + ", " + p.getAddress().getCity() + ", " + p.getAddress().getStreet() + " ",p.getPhoneNumbers().stream().map(PhoneNumber::getNumber).collect(Collectors.joining(", "))));
 
 
 
