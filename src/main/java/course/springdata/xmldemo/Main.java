@@ -4,11 +4,12 @@ import course.springdata.xmldemo.model.Address;
 import course.springdata.xmldemo.model.Person;
 import course.springdata.xmldemo.model.Persons;
 import course.springdata.xmldemo.model.PhoneNumber;
+import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.XMLConstants;
+import javax.xml.bind.*;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -50,10 +51,30 @@ public class Main {
 //            marshaller.marshal(new Persons(persons),out);
 //            System.out.printf("StringWriter: %s\n",out.toString());
 
+
+
             // 5. Unmarshal multiple Persons from XML to Java
 //            Unmarshaller unmarshaller = ctx.createUnmarshaller();
 //          Persons unmarshalled = (Persons) unmarshaller.unmarshal(new File("persons.xml"));
 //          unmarshalled.getPersons().forEach(p -> System.out.printf("| %5d | %-15.15s | %-15.15s | %-50.50s | %-40.40s |\n", p.getId(),p.getFirstName(),p.getLastName(),p.getAddress().getCountry() + ", " + p.getAddress().getCity() + ", " + p.getAddress().getStreet() + " ",p.getPhoneNumbers().stream().map(PhoneNumber::getNumber).collect(Collectors.joining(", "))));
+
+
+//            // 6. Set validation  OPTIONAL !!!!
+//            SchemaFactory sc = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+//            Schema schema = sc.newSchema(new File("persons.xsd"));
+//            unmarshaller.setSchema(schema);
+//            unmarshaller.setEventHandler((ValidationEvent ve)-> {
+//                if (ve.getSeverity() != ValidationEvent.WARNING){
+//                    System.out.printf(
+//                            "%s: Line:Col[%d:%d] - %s\n",
+//                            ve.getSeverity(), ve.getLocator().getLineNumber(),ve.getLocator().getColumnNumber(),
+//                            ve.getMessage()
+//                    );
+//                }
+//                        return true;
+//                    }
+//            ) ;
+
 
 
 
